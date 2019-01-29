@@ -1,0 +1,40 @@
+{% extends 'mainapp/layout.html' %}
+{% load staticfiles %}
+
+ {% block content %}
+ {% include 'mainapp/widgets/list.html' %}
+
+        <h2 class="rubric">Напишите нам</h2>
+        
+        Имя <input class="input" type="text"  placeholder="Анатолий"> <br>
+        Email <input class="mail" type="text" placeholder="anatoliy@mail.ru"><br>
+        Выберите тему<br>
+        <select>
+            <option value="Претензия">Претензия</option>
+            <option value="Благодарность">Благодарность</option>
+            <option value="Пожелания">Пожелания</option>
+            <option value="Иное">Иное</option>           
+        </select> <br> 
+        Напишите что душа пожелает <br>
+        <textarea class="textarea" ></textarea> <br>
+        <button type="submit">Отправить</button>
+        <button type="resert">Очистить</button>
+    <div class="location">
+        {% if locations %}
+            {% for location in locations %}
+            <div class="location1">
+                <h2>Адрес</h2>
+                <h2>{{ location.city }}</h2>
+                <p>Наш номер</p>
+                <a href="tel:+78142332211">{{ location.phone }}</a>
+                <address>{{ location.address }}</address>
+                <p>{{ location.email }}</p>
+                <p>Нас легко найти</p> <br>
+            </div>
+            {% endfor %}
+        {% else %}
+            <h2>В разработке</h2>
+        {% endif %}
+    </div>
+    <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A3b608ec8e11d8f35636ec634a2b70d1278dd88d06f86d7af99fbb4cea9c7c74f&amp;width=390&amp;height=304&amp;lang=ru_RU&amp;scroll=true"></script>
+{% endblock %}
