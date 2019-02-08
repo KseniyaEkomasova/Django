@@ -1,0 +1,50 @@
+{% extends 'mainapp/layout.html' %}
+{% load static %}
+
+
+ {% block content %}
+<h2>{% now 'd-m-y' %}</h2>
+ {% include 'mainapp/widgets/list.html' %}
+  <div class="menu">
+   {% include 'mainapp/widgets/inc_categories_menu.html' %}
+  </div>
+
+    <h2 class="rubric">Товар каталога</h2>
+    <hr>
+<div class="details-products">
+            <div class="details-slider">
+                <div class="slider-product">
+                    <img src="{{ MEDIA_URL }}{{ item.image }}">
+                </div>
+            </div>
+
+            <div class="description">
+                <h3 class="big-bold">{{ item.name }}</h3>
+                <h3 class="red">горячее предложение</h3>
+                <p class="price"> {{ item.price }} <span>руб</span></p>
+
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'basket:add' id=item.id %}" class="red-button">
+                    заказать <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </a>
+                {% endif %}
+
+                <div class="description-text">
+                    <p>{{ item.description }}</p>
+                </div>
+            </div>
+        </div>
+                <h2>Похожие продукты</h2>
+                <a class="explore" href="{% url 'products:index' %}">показать все <img src="{% static 'img/arrow.png' %}" alt=""></a>
+            </div>
+   {% for product in products %}
+    <div class="bloc">
+    <a class="bloc-list" href="pipkin1.html"><img class="decorimg" src="{{ MEDIA_URL }}{{ item.image }}" alt="Миска"></a>
+       <h5 class="bloc">{{ product.name }}</h5>
+       <h5 class="bloc">{{ product.description }}</h5>
+    </div>
+   {% endfor %}
+
+{% endblock %}
+
+
